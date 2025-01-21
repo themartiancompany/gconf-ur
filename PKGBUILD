@@ -4,7 +4,7 @@
 
 pkgname=gconf
 pkgver=3.2.6+11+g07808097
-pkgrel=11
+pkgrel=12
 pkgdesc="An obsolete configuration database system"
 url="https://gitlab.gnome.org/Archive/gconf"
 arch=($CARCH)
