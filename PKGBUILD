@@ -1,4 +1,5 @@
-# Maintainer: João Figueiredo <islandc0der@chaotic.cx>
+# Maintainer: Pierce Thompson <pierce@insprill.net>
+# Contributor: João Figueiredo <islandc0der@chaotic.cx>
 # Contributor: Jan de Groot <jan@archlinux.org>
 
 pkgname=gconf
