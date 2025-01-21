@@ -33,12 +33,6 @@ prepare() {
   # http://bugzilla.gnome.org/show_bug.cgi?id=568845
   patch -Np1 -i ../01_xml-gettext-domain.patch
 
-  # The following line copied from Fedora
-  # https://src.fedoraproject.org/rpms/GConf2/blob/70ed26d67b563d858a84505622d11f41879a6b37/f/GConf2.spec#_90
-  2to3 --write --nobackup gsettings/gsettings-schema-convert
-
-  sed -i '1s|#!/usr/bin/env python$|#!/usr/bin/python|' gsettings/gsettings-schema-convert
-
   NOCONFIGURE=1 ./autogen.sh
 }
 
@@ -52,7 +46,8 @@ build() {
     --enable-defaults-service \
     --disable-gtk-doc \
     --disable-static \
-    --disable-orbit
+    --disable-orbit \
+    --disable-gsettings-backend
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
   make
 }
