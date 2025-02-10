@@ -56,7 +56,8 @@ makedepends=(
   'glib2-devel'
 )
 install=gconf.install
-_commit=0780809731c8ab1c364202b1900d3df106b28626 # The latest and last commit, dug out from deep within the waves of time...
+# The latest and last commit, dug out from deep within the waves of time...
+_commit="0780809731c8ab1c364202b1900d3df106b28626"
 source=(
   "git+https://gitlab.gnome.org/Archive/gconf.git#commit=$_commit"
   "01_xml-gettext-domain.patch gconf-reload.patch"
@@ -95,8 +96,7 @@ build() {
   local \
     _configure_opts=()
   _configure_opts=(
-    --prefix="/usr"
-    --sysconfdir="/etc"
+    --prefix="/usr" --sysconfdir="/etc"
     --localstatedir="/var"
     --libexecdir="/usr/lib"
     --enable-defaults-service
