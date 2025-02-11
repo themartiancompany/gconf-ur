@@ -27,6 +27,9 @@
 # Contributor: João Figueiredo <islandc0der@chaotic.cx>
 # Contributor: Jan de Groot <jan@archlinux.org>
 
+_os="$( \
+  uname \
+    -o)"
 _proj="gnome"
 pkgname=gconf
 pkgver=3.2.6+11+g07808097
@@ -53,8 +56,12 @@ makedepends=(
   'gtk-doc'
   'gobject-introspection'
   'gnome-common'
-  'glib2-devel'
 )
+if [[ "${_os}" == "GNU/Linux" ]]; then
+  makedepends+=(
+    'glib2-devel'
+  )
+fi
 install=gconf.install
 # The latest and last commit, dug out from deep within the waves of time...
 _commit="0780809731c8ab1c364202b1900d3df106b28626"
