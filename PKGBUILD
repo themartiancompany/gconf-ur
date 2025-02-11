@@ -34,13 +34,24 @@ _proj="gnome"
 pkgname=gconf
 pkgver=3.2.6+11+g07808097
 pkgrel=13
-pkgdesc="An obsolete configuration database system"
+pkgdesc="Configuration database system."
 _http="https://gitlab.${_proj}.org"
 _ns="Archive"
 url="${_http}/${_ns}/gconf"
 arch=(
-  $CARCH
+  'arm'
+  'aarch64'
+  'armv7l'
+  'mips'
+  'pentium4'
+  'i686'
+  'x86_64'
 )
+if [[ "${_os}" == "GNU/Linux" ]]; then
+  arch+=(
+    $CARCH
+  )
+fi
 license=(
   'LGPL-2.0-only'
 )
