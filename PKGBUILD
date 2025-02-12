@@ -172,13 +172,15 @@ package() {
     "./"*".hook" \
     -t \
     "${pkgdir}/usr/share/libalpm/hooks"
-  # fix dbus policy location - --with-dbusdir doesn't work
-  install \
-    -Dm644 \
-    "${pkgdir}/etc/dbus-1/system.d/org.gnome.GConf.Defaults.conf" \
-    -t \
-    "${pkgdir}/usr/share/dbus-1/system.d"
-  rm \
-    -rf \
-    "${pkgdir}/etc/dbus-1/"
+  if [[ "${_polkit}" == "true" ]]; then
+    # fix dbus policy location - --with-dbusdir doesn't work
+    install \
+      -Dm644 \
+      "${pkgdir}/etc/dbus-1/system.d/org.gnome.GConf.Defaults.conf" \
+      -t \
+      "${pkgdir}/usr/share/dbus-1/system.d"
+    rm \
+      -rf \
+      "${pkgdir}/etc/dbus-1/"
+  fi
 }
