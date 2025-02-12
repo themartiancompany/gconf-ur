@@ -31,8 +31,10 @@ _os="$( \
   uname \
     -o)"
 if [[ "${_os}" == "GNU/Linux" ]]; then
+  _ldap="libldap"
   _polkit="true"
 elif [[ "${_os}" == "Android" ]]; then
+  _ldap="openldap"
   _polkit="false"
 fi
 _proj="gnome"
@@ -62,7 +64,7 @@ license=(
 )
 depends=(
   'libxml2'
-  'libldap'
+  "${_ldap}"
   'dbus-glib'
 )
 if [[ "${_polkit}" == "true" ]]; then
