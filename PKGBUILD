@@ -30,6 +30,11 @@
 _os="$( \
   uname \
     -o)"
+if [[ "${_os}" == "GNU/Linux" ]]; then
+  _polkit="true"
+elif [[ "${_os}" == "Android" ]]; then
+  _polkit="false"
+fi
 _proj="gnome"
 pkgname=gconf
 pkgver=3.2.6+11+g07808097
@@ -60,8 +65,7 @@ depends=(
   'libldap'
   'dbus-glib'
 )
-
-if [[ "${_os}" == "GNU/Linux" ]]; then
+if [[ "${_polkit}" == "true" ]]; then
   depends=(
     'polkit'
   )
@@ -72,12 +76,8 @@ makedepends=(
   'gtk-doc'
   'gobject-introspection'
   'gnome-common'
+  'glib2-devel'
 )
-if [[ "${_os}" == "GNU/Linux" ]]; then
-  makedepends+=(
-    'glib2-devel'
-  )
-fi
 install="gconf.install"
 # The latest and last commit, dug out from deep within the waves of time...
 _commit="0780809731c8ab1c364202b1900d3df106b28626"
@@ -129,6 +129,11 @@ build() {
     --disable-orbit
     --disable-gsettings-backend
   )
+  if [[ "${_polkit}" == "false" ]]; then
+    _configure_opts+=(
+      --enable-defaults-service="no"
+    )
+  fi
   cd \
     "${pkgname}"
   ./configure \
