@@ -57,10 +57,15 @@ license=(
 )
 depends=(
   'libxml2'
-  'polkit'
   'libldap'
   'dbus-glib'
 )
+
+if [[ "${_os}" == "GNU/Linux" ]]; then
+  depends=(
+    'polkit'
+  )
+fi
 makedepends=(
   'git'
   'intltool'
@@ -73,7 +78,7 @@ if [[ "${_os}" == "GNU/Linux" ]]; then
     'glib2-devel'
   )
 fi
-install=gconf.install
+install="gconf.install"
 # The latest and last commit, dug out from deep within the waves of time...
 _commit="0780809731c8ab1c364202b1900d3df106b28626"
 source=(
